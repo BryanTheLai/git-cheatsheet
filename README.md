@@ -1,92 +1,93 @@
-## Git Cheat Sheet - Concise
+## Git Cheat Sheet - Concise (Grouped by Usage Frequency)
 
-### Configuration (`git config`)
+### 🌟 Most Common (Daily) 🌟
 
-*   **`git config --list`**: Show all configs.
-*   **`git config --list | grep <pattern>`**: Search configs.
-*   **`git config --get <key>`**: Get config value.
-*   **`git config --global <key> <value>`**: Set global config.
-*   **`git config --local <key> <value>`**: Set local config.
-*   **`git config --unset <key>`**: Unset config.
-*   **`git config --remove-section <section>`**: Remove config section.
-*   **`git config --global rerere.enabled true`**: Enable rerere (reuse recorded resolutions).
-
-### Basic Workflow
-
-*   **`git init`**: New repo.
-*   **`git status`**: Show status.
-*   **`git add <file>` / `git add .`**: Stage changes.
+*   **`git status`**:  Current repo status.
+*   **`git add <file>` / `git add .`**: Stage changes for commit.
     *   `<file>`: Stage file.
-    *   `.`: Stage all.
-*   **`git commit -m "<message>"`**: Commit changes.
+    *   `.`: Stage all changes.
+*   **`git commit -m "<message>"`**: Save staged changes locally.
+*   **`git pull`**: Get remote changes & merge.
+*   **`git push`**: Share local commits to remote.
+*   **`git log --oneline`**: Compact commit history.
+*   **`git branch`**: List local branches.
+*   **`git checkout <branch_name>`**: Switch branch.
+*   **`git checkout -b <new_branch_name>`**: Create & switch to new branch.
+
+---
 
 ### Branching & Merging
 
-*   **`git branch`**: List branches.
-*   **`git branch <name>`**: Create branch.
-*   **`git checkout <name>`**: Switch branch.
-*   **`git checkout -b <name>`**: Create & switch branch.
-*   **`git merge <branch>`**: Merge branch.
-*   **`git branch -D <name>`**: Force delete branch.
-*   **`git rebase <branch>`**: Rebase branch.
+*   **`git branch <new_branch_name>`**: Create new branch.
+*   **`git merge <branch_name>`**: Merge branch into current.
+*   **`git rebase <branch_name>`**: Rebase onto branch (linear history). *Careful on shared branches.*
+*   **`git branch -D <branch_name>`**: Force delete branch (local). *Use with caution.*
 
-### History
-
-*   **`git log`**: Commit history.
-*   **`git log --oneline`**: Compact history.
-*   **`git log --graph --oneline --decorate --all`**: Visual history graph.
-*   **`git log --grep="<pattern>"`**: Search commit messages.
-*   **`git log --author="<name>"`**: Search by author.
-*   **`git log --since="<date>"` --until="<date>"`**: Search by date range.
-*   **`git log -- <file_path>`**: Show history for a file.
-*   **`git reflog`**: Branch HEAD history (reflog).
-*   **`git reflog -<n>`**: Last `<n>` reflog entries.
-*   **`git cat-file -p <hash>`**: View Git object.
-*   **`git bisect start`**: Start bisect session.
-*   **`git bisect bad`**: Mark current commit as bad during bisect.
-*   **`git bisect good <commit_hash>`**: Mark commit as good during bisect.
-*   **`git bisect reset`**: End bisect session.
-*   **`git revert <commit_hash>`**: Revert a commit (creates new commit).
-*   **`git reset --soft <commit_hash>`**: Soft reset (keep staging & working dir).
-*   **`git reset --mixed <commit_hash>`**: Mixed reset (default, keep working dir).
-*   **`git reset --hard <commit_hash>`**: Hard reset (discard working dir changes - CAUTION!).
+---
 
 ### Remotes
 
-*   **`git remote add origin <url>`**: Add remote "origin".
-*   **`git remote -v`**: List remotes.
-*   **`git fetch`**: Download remote objects/refs.
-*   **`git merge origin/<branch>`**: Merge remote branch.
-*   **`git pull`**: Fetch & merge remote branch.
-    *   Set upstream: `git branch --set-upstream-to=origin/<branch> <local_branch>`.
-*   **`git push`**: Push local commits to remote.
-    *   `git push origin <branch>`: Push specific branch.
-    *   `git push origin --tags`: Push tags.
-    *   `git push --force origin <branch>`: Force push (CAUTION!).
+*   **`git remote -v`**: List remote repos.
+*   **`git remote add origin <repo_url>`**: Add remote named "origin".
+*   **`git fetch`**: Download remote changes (no merge).
 *   **`git branch -a`**: List all branches (local & remote).
+*   **`git push origin <branch_name>`**: Push branch to remote.
+*   **`git push origin --tags`**: Push tags to remote.
+
+---
+
+### History Inspection & Manipulation
+
+*   **`git log`**: Detailed commit history.
+*   **`git log --graph --oneline --decorate --all`**: Visual history graph.
+*   **`git log --grep="<pattern>"`**: Search commit messages.
+*   **`git log --author="<name>"`**: Filter by author.
+*   **`git log -- <file_path>`**: History for file.
+*   **`git reflog`**: Branch HEAD history (recovery).
+*   **`git bisect start`**: Start bug hunt (binary search).
+*   **`git bisect bad` / `git bisect good <commit_hash>` / `git bisect reset`**: Bisect commands.
+*   **`git revert <commit_hash>`**: Undo commit (new commit). *Safe undo.*
+*   **`git reset --soft <commit_hash>`**: Reset to commit (keep staged).
+*   **`git reset --mixed <commit_hash>`**: Reset to commit (keep working dir). *Default reset.*
+*   **`git reset --hard <commit_hash>`**: Reset to commit (discard changes). *Danger: Discards work!*
+
+---
+
+### Configuration & Setup
+
+*   **`git init`**: Initialize new repo.
+*   **`git config --list`**: Show config settings.
+*   **`git config --global <key> <value>`**: Set global config.
+*   **`git config --local <key> <value>`**: Set repo config.
+*   **`git config --global rerere.enabled true`**: Enable reuse recorded resolutions.
+
+---
 
 ### Stashing
 
-*   **`git stash`**: Stash changes.
+*   **`git stash`**: Stash changes (clean work dir).
 *   **`git stash list`**: List stashes.
 *   **`git stash pop`**: Apply & remove latest stash.
 *   **`git stash apply <stash_name>`**: Apply stash (keep in list).
-*   **`git stash drop <stash_name>`**: Remove stash.
+*   **`git stash drop <stash_name>`**: Delete stash.
 
-### Worktrees
+---
+
+### Advanced & Less Frequent
 
 *   **`git worktree add <path> <branch>`**: Create worktree for branch.
 *   **`git worktree list`**: List worktrees.
 *   **`git worktree remove <path>`**: Remove worktree.
-
-### Tags
-
 *   **`git tag -a <tag_name> -m "<message>"`**: Create annotated tag.
 *   **`git tag <tag_name>`**: Create lightweight tag.
 *   **`git tag`**: List tags.
-*   **`git show <tag_name>`**: Show tag info.
+*   **`git show <tag_name>`**: Show tag details.
 *   **`git checkout tags/<tag_name>`**: Checkout tag (detached HEAD).
+*   **`git cat-file -p <hash>`**: View Git object content.
+*   **`git push --force origin <branch_name>`**: Force push (override remote). *Danger: Rewrite history!*
+*   **`git branch -D <branch_name>`**: Force delete branch (local). *Caution.*
+
 
 ---
 
-**Note:** Simplified cheat sheet. Use `git --help` for details. 
+**Note:**  `git --help <command>` for details. 
